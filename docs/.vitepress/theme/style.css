@@ -1,0 +1,290 @@
+/* ============================================================
+   BobDyn — Custom Theme
+   Dark palette; everything else stock VitePress
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   Colour tokens — background + brand only; text/border are
+   derived by VitePress from these two roots
+   ---------------------------------------------------------- */
+:root {
+    --vp-c-bg:         #0e1116;
+    --vp-c-bg-soft:    #131720;
+    --vp-c-bg-alt:     #131720;
+    --vp-c-bg-elv:     #181e2a;
+    --vp-c-brand-1:    #4ea1ff;
+    --vp-c-brand-2:    #4ea1ff;
+    --vp-c-brand-3:    #4ea1ff;
+    --vp-c-brand-soft: rgba(78, 161, 255, 0.12);
+
+    --vp-font-family-base: "Inter", ui-sans-serif, system-ui,
+                           -apple-system, "Segoe UI", sans-serif;
+}
+
+html,
+html.dark {
+    color-scheme: dark;
+}
+
+/* ----------------------------------------------------------
+   Global — hide appearance toggle (dark-only site)
+   ---------------------------------------------------------- */
+.VPSwitch,
+.VPSwitchAppearance,
+.VPNavScreenAppearance {
+    display: none !important;
+}
+
+/* ----------------------------------------------------------
+   Doc pages — typography
+   ---------------------------------------------------------- */
+.vp-doc {
+    font-family: var(--vp-font-family-base);
+}
+
+.vp-doc h2 {
+    border-top: none;
+}
+
+.vp-doc .section-intro {
+    color: var(--vp-c-text-3);
+    margin-bottom: 1rem;
+}
+
+.vp-doc .closing-note {
+    margin-top: 3rem;
+    color: var(--vp-c-text-3);
+}
+
+/* ----------------------------------------------------------
+   Doc pages — heading anchors
+   ---------------------------------------------------------- */
+.header-anchor {
+    color: var(--vp-c-brand-1) !important;
+    opacity: 0;
+    transition: opacity 0.15s;
+}
+
+h1:hover .header-anchor,
+h2:hover .header-anchor,
+h3:hover .header-anchor,
+h4:hover .header-anchor {
+    opacity: 1;
+}
+
+/* ----------------------------------------------------------
+   Doc pages — math (MathJax SVG)
+   A wide display equation has no built-in size limit, so it
+   overflows the doc column and drags the whole page into
+   horizontal scroll. Contain the scroll to the equation itself,
+   matching the treatment already given to code blocks and wide
+   diagrams below.
+   ---------------------------------------------------------- */
+.vp-doc mjx-container[jax="SVG"][display="true"] {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.vp-doc mjx-container[jax="SVG"][display="true"]::-webkit-scrollbar {
+    height: 5px;
+}
+
+.vp-doc mjx-container[jax="SVG"][display="true"]::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.vp-doc mjx-container[jax="SVG"][display="true"]::-webkit-scrollbar-thumb {
+    background: var(--vp-c-divider);
+    border-radius: 3px;
+}
+
+/* ----------------------------------------------------------
+   Hero — title
+   line-height ≥ 1.15 keeps descenders (y, g) from clipping
+   ---------------------------------------------------------- */
+.VPHero .name {
+    font-size: clamp(3.6rem, 7.4vw, 5.5rem);
+    line-height: 1.18;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(to right, #6bb6ff, #2563eb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Hero — subtitle */
+.VPHero .text {
+    font-size: clamp(1rem, 2vw, 1.45rem);
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--vp-c-text-2);
+}
+
+@media (min-width: 960px) {
+    .VPHero .actions {
+        flex-wrap: nowrap;
+    }
+
+    .VPHero .actions .VPButton {
+        white-space: nowrap;
+    }
+}
+
+/* ----------------------------------------------------------
+   Hero — image
+   VitePress absolutely-positions .image-src inside .image-container
+   so only constrain max dimensions; no margin-top (causes overflow)
+   ---------------------------------------------------------- */
+.VPHero .image-src {
+    max-width: 200px;
+    max-height: 200px;
+    object-fit: contain;
+}
+
+/* Hide the default gradient glow so the logo stands on its own */
+.VPHero .image-bg {
+    display: none;
+}
+
+@media (min-width: 960px) {
+    .VPHero .image-src {
+        max-width: 280px;
+        max-height: 280px;
+    }
+}
+
+.sample-output-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    width: 100%;
+}
+
+.sample-output-card {
+    padding: 1rem;
+    border: 1px solid var(--vp-c-divider);
+    border-radius: 12px;
+    background: var(--vp-c-bg-soft);
+}
+
+.sample-output-label {
+    margin: 0 0 0.5rem;
+    color: var(--vp-c-text-1);
+    font-size: 0.95rem;
+    font-weight: 650;
+    line-height: 1.35;
+}
+
+.sample-output-card video {
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+    background: var(--vp-c-bg);
+}
+
+.sample-output-card .pdf-embed {
+    margin-top: 1rem;
+}
+
+.sample-output-card p:not(.sample-output-label) {
+    margin: 0.85rem 0 0;
+    color: var(--vp-c-text-2);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.sample-output-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1rem;
+}
+
+.sample-output-links a {
+    display: inline-flex;
+    min-height: 2.25rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.35rem 0.75rem;
+    border: 1px solid var(--vp-c-brand-1);
+    border-radius: 999px;
+    color: var(--vp-c-brand-1);
+    font-size: 0.86rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.sample-output-links a:hover {
+    background: var(--vp-c-brand-soft);
+}
+
+.centered-diagram {
+    display: flex;
+    justify-content: center;
+}
+
+.wide-diagram,
+.model-structure-diagram,
+.workflow-diagram {
+    width: 100%;
+    margin: 1.25rem 0;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+}
+
+.wide-diagram .mermaid,
+.wide-diagram svg {
+    min-width: 720px;
+    max-width: none;
+}
+
+.model-structure-diagram,
+.workflow-diagram {
+    display: flex;
+    justify-content: center;
+}
+
+.model-structure-diagram .mermaid,
+.workflow-diagram .mermaid {
+    width: 100%;
+}
+
+.model-structure-diagram svg,
+.workflow-diagram svg {
+    width: 100% !important;
+    max-width: 100%;
+    height: auto;
+}
+
+.mermaid {
+    font-family: var(--vp-font-family-base);
+}
+
+.mermaid .nodeLabel,
+.mermaid .edgeLabel,
+.mermaid .cluster-label {
+    line-height: 1.28;
+}
+
+.mermaid .nodeLabel p,
+.mermaid .edgeLabel p,
+.mermaid .cluster-label p {
+    margin: 0;
+    line-height: 1.28;
+}
+
+.model-structure-diagram .text-outer-tspan:nth-child(n + 2) .text-inner-tspan {
+    fill: var(--vp-c-text-2);
+    font-size: 0.88em;
+}
+
+.mermaid foreignObject {
+    overflow: visible;
+}
+
+@media (max-width: 768px) {
+    .sample-output-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}

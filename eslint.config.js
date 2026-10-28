@@ -1,0 +1,42 @@
+import tsParser from "@typescript-eslint/parser";
+import tsPlugin from "@typescript-eslint/eslint-plugin";
+import vuePlugin from "eslint-plugin-vue";
+import vueParser from "vue-eslint-parser";
+import vueA11yPlugin from "eslint-plugin-vuejs-accessibility";
+
+export default [
+  {
+    ignores: ["docs/.vitepress/cache/**", "docs/.vitepress/dist/**", "node_modules/**"],
+  },
+  {
+    files: ["**/*.ts"],
+    languageOptions: {
+      parser: tsParser,
+    },
+    plugins: {
+      "@typescript-eslint": tsPlugin,
+    },
+    rules: {
+      ...tsPlugin.configs.recommended.rules,
+    },
+  },
+  {
+    files: ["**/*.vue"],
+    languageOptions: {
+      parser: vueParser,
+      parserOptions: {
+        parser: tsParser,
+      },
+    },
+    plugins: {
+      vue: vuePlugin,
+      "@typescript-eslint": tsPlugin,
+      "vuejs-accessibility": vueA11yPlugin,
+    },
+    rules: {
+      ...vuePlugin.configs["flat/recommended"].rules,
+      ...tsPlugin.configs.recommended.rules,
+      ...vueA11yPlugin.configs.recommended.rules,
+    },
+  },
+];
